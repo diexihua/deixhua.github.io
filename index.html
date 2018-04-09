@@ -231,6 +231,128 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://diexihua.github.io/2018/04/09/object/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="magicalJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mcj's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/09/object/" itemprop="url">面向对象的程序设计</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-04-09T17:05:32+08:00">
+                2018-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="u5C5E_u6027_u7C7B_u578B"><a href="#u5C5E_u6027_u7C7B_u578B" class="headerlink" title="属性类型"></a>属性类型</h1><p>只有内部才用的特性(attribute)，描述了属性(property)的各种特征，这些特征是为了实现javascript引擎用的，因此在javascript中不能直接访问他们，为了表示特性是内部值，ES5规范把他们放在两对方括号里，ECMAScript中有两个属性：数据属性与访问器属性</p>
+<h2 id="u6570_u636E_u5C5E_u6027"><a href="#u6570_u636E_u5C5E_u6027" class="headerlink" title="数据属性"></a>数据属性</h2><p>[[Configurable]] : 能否通过delete删除属性从而重新定义，默认值<code>true</code><br>[[Enumberable]] : 能否通过for-in循环返回属性，默认值<code>true</code><br>[[Writable]] : 是否可以修改属性的值，默认值<code>true</code><br>[[Value]] : 包含属性的数据值，默认为<code>undefined</code><br>要是想要修改属性默认的特性，必须使用ES5的<code>Object.defineProperty()</code>方法，三个参数：属性所在对象，属性名，描述对象(4个属性值中的一个或者多个)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;&#125;;&#10;Object.defineProperty( person, &#39;name&#39;, &#123;&#10;&#9;value : &#39;oldThree&#39;,&#10;&#9;writable : false,&#10;&#9;configurable : false&#10;&#125; );&#10;person.name = &#39;oldSix&#39;;  //&#20005;&#26684;&#27169;&#24335;&#19979;&#25253;&#38169;&#10;console.log( person.name );  //&#39;oldThree&#39;&#10;&#10;delete person.name;  //&#20005;&#26684;&#27169;&#24335;&#19979;&#25253;&#38169;&#10;console.log( person.name );  //&#39;oldThree&#39;</span><br></pre></td></tr></table></figure></p>
+<p>一旦把configurable设置为不可配置，那么就不能变回可配置了，此时若在调用<code>Object.defineProperty()</code>方法修改除<code>writable</code>之外的特性都将报错</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://diexihua.github.io/2018/03/24/jsNode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -469,7 +591,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
