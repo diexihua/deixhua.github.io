@@ -90,7 +90,7 @@
 
 核心(ECMAScript)，ECMAScript与Web浏览器没有依赖关系，web浏览器只是ECMAScript实现可能的’宿主环境’之一，宿主环境不仅提供基本的ECMAScript实现，同时也会提供该语言的扩展 - （如DOM，则利用ECMAScript的核心类型和语法提供更多具体的功能，以便实现对环境的操作)，其他宿主环境包">
 <meta property="og:image" content="http://diexihua.github.io/2018/03/24/jsNode/4p1.jpg">
-<meta property="og:updated_time" content="2018-04-09T08:55:12.380Z">
+<meta property="og:updated_time" content="2018-04-15T13:50:20.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js学习笔记">
 <meta name="twitter:description" content="简介一个完整的Javascript实现应由下列三个不同的部分组成
@@ -319,6 +319,7 @@
 <h2 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a>toString</h2><p>null与undefined的toString会报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">try&#123;&#10;    console.log( typeNull.toString() ); //&#25253;&#38169;&#10;&#125;catch(e)&#123;&#10;    console.log(e.name + &#34;: &#34; + e.message);&#10;&#125;&#10;try&#123;&#10;    console.log( undef.toString() );    //&#25253;&#38169;&#10;&#125;catch(e)&#123;&#10;    console.log(e.name + &#34;: &#34; + e.message);&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="u64CD_u4F5C_u7B26"><a href="#u64CD_u4F5C_u7B26" class="headerlink" title="操作符"></a>操作符</h1><h2 id="u4F4D_u64CD_u4F5C_u7B26"><a href="#u4F4D_u64CD_u4F5C_u7B26" class="headerlink" title="位操作符"></a>位操作符</h2><blockquote><p>这套运算符针对的是整数，所以对javascript无用，因为javascript内部所有数字都保存为双精度浮点数，若使用位运算符，javascript不得不将运算数先转化为整数后再运算，降低了效率</p>
 </blockquote>
+<p>按位非(NOT)<code>~</code>,使用方法,位运算NOT是三步的处理过程:<br>1.把运算数转换成32位数字<br>2.把二进制数转换成它的二进制反码（0-&gt;1, 1-&gt;0）<br>3.把二进制数转换成浮点数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#23545;&#20110;&#28014;&#28857;&#25968;&#65292;~~value&#21487;&#20197;&#20195;&#26367;parseInt(value)&#65292;&#32780;&#19988;&#21069;&#32773;&#25928;&#29575;&#26356;&#39640;&#20123;&#10;~~(-6.6) //-6&#10;parseint(-6.6) //-6</span><br></pre></td></tr></table></figure></p>
 <h2 id="u5E03_u5C14_u64CD_u4F5C_u7B26"><a href="#u5E03_u5C14_u64CD_u4F5C_u7B26" class="headerlink" title="布尔操作符"></a>布尔操作符</h2><ul>
 <li>逻辑非(!) 将值变为布尔值再取反，两个逻辑非(!!) 可以模拟Boolean()函数，将值转化为布尔值</li>
 <li>逻辑与(&amp;&amp;) 两者都是true返回true，有一个是false则返回false，第一个参数是对象，则返回第二个参数，第一个参数为true才会返回第二个参数，若有null、NaN、undefined则返回这些本身,若有未定义变量，则报错，短路操作，第一个参数是false就不会对第二个参数求值了</li>
@@ -506,7 +507,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -519,7 +520,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">標籤</span>
                 
               </div>
