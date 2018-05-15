@@ -231,6 +231,383 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://diexihua.github.io/2018/05/15/highQualityCode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="magicalJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mcj's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/15/highQualityCode/" itemprop="url">编写高质量的代码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-05-15T12:45:10+08:00">
+                2018-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="u9632_u6B62_u6D6E_u70B9_u6570_u6EA2_u51FA"><a href="#u9632_u6B62_u6D6E_u70B9_u6570_u6EA2_u51FA" class="headerlink" title="防止浮点数溢出"></a>防止浮点数溢出</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = 0.1 + 0.2; //0.30000000000000004</span><br></pre></td></tr></table></figure>
+<p>这是JsvaScript中最经常报告的bug，这是遵循二进制浮点数算术标准(IEEE 754)而导致的，幸运的是，浮点数中的整数运算是精确的，所以小数表现出来的问题可以通过指定精度来避免<br>例如，针对上面的相加可以这样处理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = (1+2)/10&#65307; //0.3</span><br></pre></td></tr></table></figure></p>
+<h2 id="u6B63_u786E_u68C0_u6D4B_u6570_u636E_u7C7B_u578B"><a href="#u6B63_u786E_u68C0_u6D4B_u6570_u636E_u7C7B_u578B" class="headerlink" title="正确检测数据类型"></a>正确检测数据类型</h2><p>使用<code>typeof</code>运算符检测<code>null</code>值时，返回的是“object”，而不是“null”。更好的检测方式其实很简单。下面定义了一个检测值类型的一般方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function type = function(o)&#123;&#10;&#9;return (o === null) ? &#34;null&#34; : (typeof o);&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样可以避开因为<code>null</code>值影响基本数据的监测。<br><strong>注意：typeof不能够检测复杂的数据类型，以及各种特殊用途的对象，如正则表达式、日期对象、数学对象等</strong><br>下面是一个比较完整的数据类型安全检测方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#23433;&#20840;&#26816;&#27979;javascript&#22522;&#26412;&#25968;&#25454;&#31867;&#22411;&#21644;&#20869;&#32622;&#23545;&#35937;&#10;//&#21442;&#25968;&#65306;o &#34920;&#31034;&#26816;&#27979;&#30340;&#20540;&#10;/*&#36820;&#22238;&#20540;: &#36820;&#22238;&#23383;&#31526;&#20018;&#34;undefined&#34;&#12289;&#34;number&#34;&#12289;&#34;boolean&#34;&#12289;&#34;string&#34;&#12289;&#34;function&#34;&#12289;&#34;regexp&#34;&#12289;&#34;array&#34;&#12289;&#34;date&#34;&#12289;&#34;error&#34;&#12289;&#34;object&#34;&#12289;&#25110;&#34;null&#34;*/&#10;var typeof = function(o)&#123;&#10;&#9;var _toString = Object.prototype.toString;&#10;&#9;//&#33719;&#21462;&#23545;&#35937;&#30340;toString()&#26041;&#27861;&#24341;&#29992;&#10;&#9;//&#21015;&#20030;&#22522;&#26412;&#25968;&#25454;&#31867;&#22411;&#21644;&#20869;&#32622;&#23545;&#35937;&#31867;&#22411;&#65292;&#21487;&#20197;&#36827;&#19968;&#27493;&#34917;&#20805;&#35813;&#25968;&#32452;&#30340;&#26816;&#27979;&#25968;&#25454;&#31867;&#22411;&#33539;&#22260;&#10;&#9;var _type = &#123;&#10;&#9;&#9;&#34;undefined&#34; : &#34;undefined&#34;,&#10;&#9;&#9;&#34;number&#34; : &#34;number&#34;,&#10;&#9;&#9;&#34;boolean&#34; : &#34;boolean&#34;,&#10;&#9;&#9;&#34;string&#34; : &#34;string&#34;,&#10;&#9;&#9;&#34;[object Function]&#34; : &#34;function&#34;,&#10;&#9;&#9;&#34;[object RegExp]&#34; : &#34;regexp&#34;,&#10;&#9;&#9;&#34;[object Array]&#34; : &#34;array&#34;,&#10;&#9;&#9;&#34;[object Date]&#34; : &#34;date&#34;,&#10;&#9;&#9;&#34;[object Error]&#34; : &#34;error&#34;&#10;&#9;&#125;&#10;&#9;return _type[typeof o] || _type[_toString.call(o)] || (o? &#34;object&#34; : &#34;null&#34;);&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>应用示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var s = Math.abs;&#10;alert( typeof(s) );</span><br></pre></td></tr></table></figure></p>
+<p>##避免误用parseInt<br>建议使用parseInt时，一定要带基数参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parseInt(&#34;08&#34;); //0&#10;parseInt(&#34;08&#34;, 10); //8</span><br></pre></td></tr></table></figure></p>
+<h2 id="u4F7F_u7528_u67E5_u8868_u6CD5_u63D0_u9AD8_u6761_u4EF6_u68C0_u6D4B_u7684_u6027_u80FD"><a href="#u4F7F_u7528_u67E5_u8868_u6CD5_u63D0_u9AD8_u6761_u4EF6_u68C0_u6D4B_u7684_u6027_u80FD" class="headerlink" title="使用查表法提高条件检测的性能"></a>使用查表法提高条件检测的性能</h2><p>例如，在下面代码中，使用switch检测value值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">switch(value)&#123;&#10;&#9;case 0:&#10;&#9;&#9;return result0;&#10;&#9;case 1:&#10;&#9;&#9;return result1;&#10;&#9;case 2:&#10;&#9;&#9;return result2;&#10;&#9;case 03:&#10;&#9;&#9;return result3;&#10;&#9;case 4:&#10;&#9;&#9;return result4;&#10;&#9;case 5:&#10;&#9;&#9;return result5;&#10;&#9;case 6:&#10;&#9;&#9;return result6;&#10;&#9;case 7:&#10;&#9;&#9;return result7;&#10;&#9;case 8:&#10;&#9;&#9;return result8;&#10;&#9;case 9:&#10;&#9;&#9;return result9;&#10;&#9;default :&#10;&#9;&#9;return result10;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用switch结构检测value值的代码所占的空间可能与switch重要性不成比例，代码很笨重，整个结构可以使用一个数组查询代替：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var results = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9];&#10;return results[value] ? results[value] : result10;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://diexihua.github.io/2018/05/11/ajaxNode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="magicalJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mcj's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/11/ajaxNode/" itemprop="url">ajax学习笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-05-11T22:32:23+08:00">
+                2018-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>ajax( Asynchronous Javascript And XML – 异步的javascript和XML )，用javascript异步的去操作xml，主要用来实现客户端与服务器的异步通信效果，实现页面的局部刷新<br>可以理解为ajax替用户做了一系列的动作<br>1.打开浏览器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var xhr = null;&#10;// &#21019;&#24314;&#19968;&#20010;ajax&#23545;&#35937;&#10;if( window.XMLHttpRequest )&#123;&#10;&#9;xhr = new XMLHttpRequest();&#10;&#125;else&#123;&#10;&#9;// &#20860;&#23481;ie&#10;&#9;xhr = new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;);&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.输入网址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#35831;&#27714;&#26041;&#24335; / &#35831;&#27714;&#22320;&#22336; / &#26159;&#21542;&#24322;&#27493;&#10;xhr.open(&#39;get&#39;, &#39;1.get.php?username=&#39;+encodeURI(&#39;&#20845;&#20845;&#39;)+&#39;&#38;password=22&#39;, true);</span><br></pre></td></tr></table></figure></p>
+<p>3.提交请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.send();</span><br></pre></td></tr></table></figure></p>
+<p>4.等待网页打开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#31561;&#24453;&#26381;&#21153;&#22120;&#36820;&#22238;&#20869;&#23481;&#10;xhr.onreadystatechange = function()&#123;&#10;&#9;if ( xhr.readyState === 4 ) &#123;&#10;&#9;&#9;if ( xhr.status === 200) &#123;&#10;&#9;&#9;&#9;alert(xhr.responseText);&#10;&#9;&#9;&#125;else&#123;&#10;&#9;&#9;&#9;alert( xhr.status );&#10;&#9;&#9;&#125;&#10;&#9;&#125;;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>综合起来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var xhr = null;&#10;if( window.XMLHttpRequest )&#123;&#10;&#9;xhr = new XMLHttpRequest();&#10;&#125;else&#123;&#10;&#9;xhr = new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;);&#10;&#125;&#10;xhr.open(&#39;get&#39;, &#39;testAjax.php?username=magicalj&#39;, true);&#10;xhr.send();&#10;xhr.onreadystatechange = function()&#123;&#10;&#9;if ( xhr.readyState === 4 ) &#123;&#10;&#9;&#9;if ( xhr.status === 200) &#123;&#10;&#9;&#9;&#9;alert(xhr.responseText);&#10;&#9;&#9;&#125;else&#123;&#10;&#9;&#9;&#9;alert( xhr.status );&#10;&#9;&#9;&#125;&#10;&#9;&#125;;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="u5BB9_u9519_u5904_u7406"><a href="#u5BB9_u9519_u5904_u7406" class="headerlink" title="容错处理"></a>容错处理</h3><p>当状态值改变时触发<code>onreadystatechange</code>函数,那么什么是状态呢，<code>readyState</code>的值代表了ajax的工作状态<br>0: (初始化)未调用open()方法<br>1: (载入)已经调用send(),正在发送请求<br>2: (载入完成)send()完成,已收到全部响应内容<br>3: (解析)正在解析响应内容<br>4: (完成)解析完成,可在客户端调用<br>也就是每次<code>readyState</code>值变化都会触发<code>onreadystatechange</code>函数，我们需要在响应内容解析完成时去对得到的数据进行处理才不会出错，所以进行第一次判断是对<code>readyState</code><br>第二次判断是对<code>status</code>进行判断，<code>status</code>为服务器状态，常见的就是200(成功了)，404(找不到页面)等等，具体可查询http状态码，针对性进行相应处理</p>
+<h3 id="u6CE8_u610F_u4E8B_u9879"><a href="#u6CE8_u610F_u4E8B_u9879" class="headerlink" title="注意事项"></a>注意事项</h3><h4 id="get_u65B9_u5F0F_u5B58_u5728_u7684_u95EE_u9898"><a href="#get_u65B9_u5F0F_u5B58_u5728_u7684_u95EE_u9898" class="headerlink" title="get方式存在的问题"></a>get方式存在的问题</h4><p>1.缓存(请求地址一样的话)，post无缓存<br>解决办法：可以在url?后面接随机数,例如时间戳<br>2.乱码(存在中文)<br>解决办法：使用编码encodeURI<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(&#39;get&#39;, &#39;testAjax.php?username=&#39;+encodeURI(&#39;&#20845;&#20845;&#39;), true);</span><br></pre></td></tr></table></figure></p>
+<h4 id="post_u65B9_u5F0F_u5B58_u5728_u7684_u95EE_u9898"><a href="#post_u65B9_u5F0F_u5B58_u5728_u7684_u95EE_u9898" class="headerlink" title="post方式存在的问题"></a>post方式存在的问题</h4><p>1.post方式不能在url后面直接接数据，数据放在<code>send()</code>里面作为参数传递，并且必须设置请求头，去申明发送的数据类型，因为设置请求头已经告诉了编码，所以post无需编码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.SetRequestHeader(&#39;content-type&#39;, &#39;application/X-www-form-urlencoded&#39;);&#10;xhr.send(username=magicalj);</span><br></pre></td></tr></table></figure></p>
+<h3 id="u8DE8_u57DF"><a href="#u8DE8_u57DF" class="headerlink" title="跨域"></a>跨域</h3><p>协议、域名、端口都相同是同源，否则都是跨域<br>解决方案:<br>1.jsonp<br>在数据加载进来前定义好一个函数，这个函数接受一个参数(数据)，利用这个参数做相应操作<br>在需要的时候，使用script标签加载相应的远程文件资源，资源加载完毕后就执行上述定义好的函数，把数据当做参数传进去<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function cb(data)&#123;&#10;&#9;alert(data);&#10;&#125;&#10;&#10;var scriptTest = document.createElement(&#39;script&#39;);&#10;scriptTest.src=&#39;url?callback=cb&#39;;&#10;document.body.appendChild(scriptTest);</span><br></pre></td></tr></table></figure></p>
+<p>后端传过来的数据需要定义好一个函数名字与我们的一样，这样就可以使用了，所以我们把这个函数名当做参数传给后端，后端再操作完返回<br>2.document.domain+iframe的设置<br>3.window.name实现的跨域数据传输<br>4.使用HTML5 postMessage</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://diexihua.github.io/2018/05/10/webpack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="magicalJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mcj's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/10/webpack/" itemprop="url">关于webpack</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-05-10T12:50:14+08:00">
+                2018-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="extract-text-webpack-plugin"><a href="#extract-text-webpack-plugin" class="headerlink" title="extract-text-webpack-plugin"></a>extract-text-webpack-plugin</h3><p><code>npm i -D extract-text-webpack-plugin</code><br>把css提取为单独的css文件的插件，但是使用后一直报错，查了一下是这个插件对我的webpack4.x版本不支持，解决方法如下<br><code>npm i -D extract-text-webpack-plugin@next</code><br>或者也可以使用另一个插件<br><code>npm i -D mini-css-extract-plugin</code><br>插件的配置暂时还没有研究，要使用的话可自行查找</p>
+<h3 id="CommonsChunkPlugin"><a href="#CommonsChunkPlugin" class="headerlink" title="CommonsChunkPlugin"></a>CommonsChunkPlugin</h3><p>提取chunks之间共享的通用模块</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://diexihua.github.io/2018/04/26/cssNode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -303,6 +680,11 @@
         
           
             <p><code>margin</code>与<code>padding</code>的值为百分比时，分别是如何计算的？<br><code>margin</code>：相对最近的父级块级元素的width( <code>margin-top</code>与<code>margin-bottom</code>也是根据width )<br><code>padding</code>：相对最近的父级块级元素的width( <code>padding-top</code>与<code>padding-bottom</code>也是根据width )</p>
+<p>css同级别样式会找到最后一条, 与类名排序无关，最后引入的css最新覆盖,<code>style</code>样式一样看顺序 例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;style&#62;&#10;.dd3&#123;&#10;  background: yellow;&#10;&#125;&#10;&#60;/style&#62;</span><br></pre></td></tr></table></figure></p>
+<p>1.css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.dd1&#123; background: black; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.dd2&#123; background: white; &#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;div class=&#34;dd1 dd2&#34;&#62;&#60;/div&#62;&#10;&#60;div class=&#34;dd2 dd1&#34;&#62;&#60;/div&#62;</span><br></pre></td></tr></table></figure>
+<p>上述两个div均为白色</p>
 <p>完善中…</p>
 
           
@@ -544,15 +926,14 @@
       
         
           
-            <h3 id="u5C06_u7C7B_u6570_u7EC4_u8F6C_u5316_u4E3A_u6570_u7EC4"><a href="#u5C06_u7C7B_u6570_u7EC4_u8F6C_u5316_u4E3A_u6570_u7EC4" class="headerlink" title="将类数组转化为数组"></a>将类数组转化为数组</h3><p>Array.prototype.slice.call();</p>
+            <h3 id="u5C06_u7C7B_u6570_u7EC4_u8F6C_u5316_u4E3A_u6570_u7EC4"><a href="#u5C06_u7C7B_u6570_u7EC4_u8F6C_u5316_u4E3A_u6570_u7EC4" class="headerlink" title="将类数组转化为数组"></a>将类数组转化为数组</h3><p>Array.prototype.slice.call();<br>[].slice.call();<br>ES6: Array.from();</p>
+<h3 id="js_u81EA_u5B9A_u4E49_u4E8B_u4EF6"><a href="#js_u81EA_u5B9A_u4E49_u4E8B_u4EF6" class="headerlink" title="js自定义事件"></a>js自定义事件</h3><p>记得写！！！！！</p>
 <h3 id="u4E00_u4E2A_u672A_u77E5_u5BBD_u9AD8_u7684div_u5982_u4F55_u5728_u672A_u77E5_u5BBD_u9AD8_u7684div_u4E2D_u5C45_u4E2D"><a href="#u4E00_u4E2A_u672A_u77E5_u5BBD_u9AD8_u7684div_u5982_u4F55_u5728_u672A_u77E5_u5BBD_u9AD8_u7684div_u4E2D_u5C45_u4E2D" class="headerlink" title="一个未知宽高的div如何在未知宽高的div中居中"></a>一个未知宽高的div如何在未知宽高的div中居中</h3><figure class="highlight html"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"father"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>1.使用table-cell渲染为表格，把子元素变为inline-block，若是<code>img</code>就不用变了<br><figure class="highlight css"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#father</span><span class="rules">&#123;</span><br><span class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">300px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="rule"><span class="attribute">display</span>:<span class="value"> table-cell</span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">text-align</span>:<span class="value"> center</span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">vertical-align</span>:<span class="value"> middle</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#child</span><span class="rules">&#123;</span><br><span class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#f00</span></span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
 <p>2.使用flex布局，也就是弹性盒子，还有一个<code>display: table</code>，据说是flex前身，兼容以前版本，具体内容还不清楚<br>display:box; 是老语法，display:flex;是新语法，二者还有以下不同：<br>与子元素display方式的相关性不同display:box; 作用下，如果子元素是block的，竖着排，如果子元素是 inline、inline-block的，横着排。display:flex; 作用下，是横着排还是竖着排，只取决于 flex-direction的值是row还是column。<br>float等属性是否受影响的情况不同display:box;作用下，float、clear、text-align、vertical-align 仍起作用。 display:flex;作用下，上述四属性失效。<br>横向排列时，子元素之间空白字符（空格、换行等）处理不同display:box;作用下，不会被忽略。display:flex; 作用下，忽略</p>
 <figure class="highlight css"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#father</span><span class="rules">&#123;</span><br><span class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">300px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">justify-content</span>:<span class="value"> center</span></span>;  <span class="comment">/* 是在主轴上的对齐方式，即X轴 */</span></span><br><span class="line">	<span class="rule"><span class="attribute">align-items</span>:<span class="value"> center</span></span>;  <span class="comment">/* 是在Y轴上的对齐方式，针对于在只有一条轴的情况 */</span></span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#child</span><span class="rules">&#123;</span><br><span class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#f00</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>3.使用transform与绝对定位</p>
 <figure class="highlight css"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#father</span><span class="rules">&#123;</span><br><span class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">300px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="id">#child</span><span class="rules">&#123;</span><br><span class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#f00</span></span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate</span>( -<span class="number">50%</span>, -<span class="number">50%</span> )</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<h1 id="gulp__u4F7F_u7528"><a href="#gulp__u4F7F_u7528" class="headerlink" title="gulp 使用"></a>gulp 使用</h1><p>安装nodejs，之后<code>sudo npm install gulp -g</code>，mac下才需要输入sudo，表示管理员权限<br>1.创建文件夹，之后 <code>npm init</code>，后续随意，完毕后会创建一个<code>package.json</code>文件，这个文件保存着这个项目相关信息，比如你用到的各种依赖（这里主要是插件）<br>2.<code>npm install gulp --save-dev</code>，这一次我们局部安装Gulp，使用—save-dev，将通知计算机在package.json中添加gulp依赖<br>3.</p>
-
           
         
       
@@ -876,10 +1257,8 @@
 <li>用<code>new</code>创建( 用<code>new</code>去调用一个函数，这个时候函数中的this就是创建出来的对象，而且函数的返回值直接就是<code>this</code>(隐式返回)，new后面调用的函数：叫做构造函数 )<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function CreatePerson( name )&#123;&#10;&#9;this.name = name;&#10;&#9;this.say = function()&#123;&#10;&#9;&#9;alert( this.name );&#10;&#9;&#125;;&#10;&#125;&#10;var person1 =  new CreatePerson(&#39;&#23567;&#26126;&#39;);&#10;var person2 =  new CreatePerson(&#39;&#23567;&#24378;&#39;);&#10;person1.say();&#10;person2.say();</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>上述还有问题就是CreatePerson的say方法是相同的，但是我们new一个CreatePerson就会创建一个say方法，我们需要把公用方法或者属性存在内存中，只创建一个，然后实例分别去调用，提高性能，要使用到<code>原型</code></p>
-<pre><code>
-</code></pre><p>a标签伪类，顺序 ： <code>:link</code>未访问, <code>:visited</code>访问过, <code>:hover</code>鼠标移入/悬停, <code>:active</code>按下<br><code>h</code>,<code>td</code>,<code>p</code>标签不要再嵌套块标签    </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>上述还有问题就是CreatePerson的say方法是相同的，但是我们new一个CreatePerson就会创建一个say方法，我们需要把公用方法或者属性存在内存中，只创建一个，然后实例分别去调用，提高性能，要使用到<code>原型</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function CreatePerson( name )&#123;&#10;&#9;this.name = name;&#10;&#125;&#10;CreatePerson.prototype.say = function()&#123;&#10;&#9;alert( this.name );&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>待续…</p>
 
           
         
@@ -961,7 +1340,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -974,7 +1353,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">標籤</span>
                 
               </div>

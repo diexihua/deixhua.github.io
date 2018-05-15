@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="js," />
+  <meta name="keywords" content="js 自我笔记," />
 
 
 
@@ -90,7 +90,7 @@
 
 核心(ECMAScript)，ECMAScript与Web浏览器没有依赖关系，web浏览器只是ECMAScript实现可能的’宿主环境’之一，宿主环境不仅提供基本的ECMAScript实现，同时也会提供该语言的扩展 - （如DOM，则利用ECMAScript的核心类型和语法提供更多具体的功能，以便实现对环境的操作)，其他宿主环境包">
 <meta property="og:image" content="http://diexihua.github.io/2018/03/24/jsNode/4p1.jpg">
-<meta property="og:updated_time" content="2018-04-15T13:50:20.093Z">
+<meta property="og:updated_time" content="2018-05-11T14:40:55.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js学习笔记">
 <meta name="twitter:description" content="简介一个完整的Javascript实现应由下列三个不同的部分组成
@@ -388,10 +388,8 @@
 <li>用<code>new</code>创建( 用<code>new</code>去调用一个函数，这个时候函数中的this就是创建出来的对象，而且函数的返回值直接就是<code>this</code>(隐式返回)，new后面调用的函数：叫做构造函数 )<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function CreatePerson( name )&#123;&#10;&#9;this.name = name;&#10;&#9;this.say = function()&#123;&#10;&#9;&#9;alert( this.name );&#10;&#9;&#125;;&#10;&#125;&#10;var person1 =  new CreatePerson(&#39;&#23567;&#26126;&#39;);&#10;var person2 =  new CreatePerson(&#39;&#23567;&#24378;&#39;);&#10;person1.say();&#10;person2.say();</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>上述还有问题就是CreatePerson的say方法是相同的，但是我们new一个CreatePerson就会创建一个say方法，我们需要把公用方法或者属性存在内存中，只创建一个，然后实例分别去调用，提高性能，要使用到<code>原型</code></p>
-<pre><code>
-</code></pre><p>a标签伪类，顺序 ： <code>:link</code>未访问, <code>:visited</code>访问过, <code>:hover</code>鼠标移入/悬停, <code>:active</code>按下<br><code>h</code>,<code>td</code>,<code>p</code>标签不要再嵌套块标签    </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>上述还有问题就是CreatePerson的say方法是相同的，但是我们new一个CreatePerson就会创建一个say方法，我们需要把公用方法或者属性存在内存中，只创建一个，然后实例分别去调用，提高性能，要使用到<code>原型</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function CreatePerson( name )&#123;&#10;&#9;this.name = name;&#10;&#125;&#10;CreatePerson.prototype.say = function()&#123;&#10;&#9;alert( this.name );&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>待续…</p>
 
       
     </div>
@@ -409,7 +407,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/js/" rel="tag"># js</a>
+            <a href="/tags/js-自我笔记/" rel="tag"># js 自我笔记</a>
           
         </div>
       
@@ -507,7 +505,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -520,7 +518,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">標籤</span>
                 
               </div>

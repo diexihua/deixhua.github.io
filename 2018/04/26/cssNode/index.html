@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="css," />
+  <meta name="keywords" content="css 自我笔记," />
 
 
 
@@ -80,18 +80,18 @@
 
 
 <meta name="description" content="margin与padding的值为百分比时，分别是如何计算的？margin：相对最近的父级块级元素的width( margin-top与margin-bottom也是根据width )padding：相对最近的父级块级元素的width( padding-top与padding-bottom也是根据width )
-完善中…">
+css同级别样式会找到最后一条, 与类名排序无关，最后引入的css最新覆盖,style">
 <meta property="og:type" content="article">
 <meta property="og:title" content="css笔记">
 <meta property="og:url" content="http://diexihua.github.io/2018/04/26/cssNode/index.html">
 <meta property="og:site_name" content="Mcj's Blogs">
 <meta property="og:description" content="margin与padding的值为百分比时，分别是如何计算的？margin：相对最近的父级块级元素的width( margin-top与margin-bottom也是根据width )padding：相对最近的父级块级元素的width( padding-top与padding-bottom也是根据width )
-完善中…">
-<meta property="og:updated_time" content="2018-05-09T16:06:11.572Z">
+css同级别样式会找到最后一条, 与类名排序无关，最后引入的css最新覆盖,style">
+<meta property="og:updated_time" content="2018-05-15T04:46:35.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css笔记">
 <meta name="twitter:description" content="margin与padding的值为百分比时，分别是如何计算的？margin：相对最近的父级块级元素的width( margin-top与margin-bottom也是根据width )padding：相对最近的父级块级元素的width( padding-top与padding-bottom也是根据width )
-完善中…">
+css同级别样式会找到最后一条, 与类名排序无关，最后引入的css最新覆盖,style">
 
 
 
@@ -302,6 +302,11 @@
 
       
         <p><code>margin</code>与<code>padding</code>的值为百分比时，分别是如何计算的？<br><code>margin</code>：相对最近的父级块级元素的width( <code>margin-top</code>与<code>margin-bottom</code>也是根据width )<br><code>padding</code>：相对最近的父级块级元素的width( <code>padding-top</code>与<code>padding-bottom</code>也是根据width )</p>
+<p>css同级别样式会找到最后一条, 与类名排序无关，最后引入的css最新覆盖,<code>style</code>样式一样看顺序 例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;style&#62;&#10;.dd3&#123;&#10;  background: yellow;&#10;&#125;&#10;&#60;/style&#62;</span><br></pre></td></tr></table></figure></p>
+<p>1.css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.dd1&#123; background: black; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.css<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.dd2&#123; background: white; &#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;div class=&#34;dd1 dd2&#34;&#62;&#60;/div&#62;&#10;&#60;div class=&#34;dd2 dd1&#34;&#62;&#60;/div&#62;</span><br></pre></td></tr></table></figure>
+<p>上述两个div均为白色</p>
 <p>完善中…</p>
 
       
@@ -320,7 +325,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/css/" rel="tag"># css</a>
+            <a href="/tags/css-自我笔记/" rel="tag"># css 自我笔记</a>
           
         </div>
       
@@ -342,6 +347,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/10/webpack/" rel="prev" title="关于webpack">
+                关于webpack <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -409,7 +418,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -422,7 +431,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">標籤</span>
                 
               </div>

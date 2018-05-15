@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="html 自我笔记," />
+  <meta name="keywords" content="js," />
 
 
 
@@ -79,16 +79,22 @@
 
 
 
-<meta name="description" content="块级元素与行内元素常见的块级元素( block )：h1-h6，p，div，ul，dl，dt，dd，formli(display: list-item)，table(display: table)常见的行内元素( inline )：span，a，label，，，( inline-block )：img，input(不同type表现不同，比较怪)，select，以上为chrome与safari实践">
+<meta name="description" content="防止浮点数溢出1num = 0.1 + 0.2; //0.30000000000000004
+这是JsvaScript中最经常报告的bug，这是遵循二进制浮点数算术标准(IEEE 754)而导致的，幸运的是，浮点数中的整数运算是精确的，所以小数表现出来的问题可以通过指定精度来避免例如，针对上面的相加可以这样处理1num = (1+2)/10&amp;#65307; //0.3
+正确检测数据类型使用type">
 <meta property="og:type" content="article">
-<meta property="og:title" content="html笔记">
-<meta property="og:url" content="http://diexihua.github.io/2018/04/26/htmlNode/index.html">
+<meta property="og:title" content="编写高质量的代码">
+<meta property="og:url" content="http://diexihua.github.io/2018/05/15/highQualityCode/index.html">
 <meta property="og:site_name" content="Mcj's Blogs">
-<meta property="og:description" content="块级元素与行内元素常见的块级元素( block )：h1-h6，p，div，ul，dl，dt，dd，formli(display: list-item)，table(display: table)常见的行内元素( inline )：span，a，label，，，( inline-block )：img，input(不同type表现不同，比较怪)，select，以上为chrome与safari实践">
-<meta property="og:updated_time" content="2018-05-11T14:34:09.086Z">
+<meta property="og:description" content="防止浮点数溢出1num = 0.1 + 0.2; //0.30000000000000004
+这是JsvaScript中最经常报告的bug，这是遵循二进制浮点数算术标准(IEEE 754)而导致的，幸运的是，浮点数中的整数运算是精确的，所以小数表现出来的问题可以通过指定精度来避免例如，针对上面的相加可以这样处理1num = (1+2)/10&amp;#65307; //0.3
+正确检测数据类型使用type">
+<meta property="og:updated_time" content="2018-05-15T06:24:06.583Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="html笔记">
-<meta name="twitter:description" content="块级元素与行内元素常见的块级元素( block )：h1-h6，p，div，ul，dl，dt，dd，formli(display: list-item)，table(display: table)常见的行内元素( inline )：span，a，label，，，( inline-block )：img，input(不同type表现不同，比较怪)，select，以上为chrome与safari实践">
+<meta name="twitter:title" content="编写高质量的代码">
+<meta name="twitter:description" content="防止浮点数溢出1num = 0.1 + 0.2; //0.30000000000000004
+这是JsvaScript中最经常报告的bug，这是遵循二进制浮点数算术标准(IEEE 754)而导致的，幸运的是，浮点数中的整数运算是精确的，所以小数表现出来的问题可以通过指定精度来避免例如，针对上面的相加可以这样处理1num = (1+2)/10&amp;#65307; //0.3
+正确检测数据类型使用type">
 
 
 
@@ -118,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://diexihua.github.io/2018/04/26/htmlNode/"/>
+  <link rel="canonical" href="http://diexihua.github.io/2018/05/15/highQualityCode/"/>
 
 
 
 
 
-  <title>html笔记 | Mcj's Blogs</title>
+  <title>编写高质量的代码 | Mcj's Blogs</title>
   
 
 
@@ -231,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://diexihua.github.io/2018/04/26/htmlNode/">
+    <link itemprop="mainEntityOfPage" href="http://diexihua.github.io/2018/05/15/highQualityCode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="magicalJ">
@@ -248,7 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">html笔记</h1>
+          <h1 class="post-title" itemprop="name headline">编写高质量的代码</h1>
         
 
         <div class="post-meta">
@@ -260,8 +266,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-04-26T23:00:34+08:00">
-                2018-04-26
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-05-15T12:45:10+08:00">
+                2018-05-15
               </time>
             
 
@@ -298,8 +304,14 @@
       
 
       
-        <h3 id="u5757_u7EA7_u5143_u7D20_u4E0E_u884C_u5185_u5143_u7D20"><a href="#u5757_u7EA7_u5143_u7D20_u4E0E_u884C_u5185_u5143_u7D20" class="headerlink" title="块级元素与行内元素"></a>块级元素与行内元素</h3><p>常见的块级元素( block )：<code>h1</code>-<code>h6</code>，<code>p</code>，<code>div</code>，<code>ul</code>，<code>dl</code>，<code>dt</code>，<code>dd</code>，<code>form</code><br><code>li</code>(display: list-item)，<code>table</code>(display: table)<br>常见的行内元素( inline )：<code>span</code>，<code>a</code>，<code>label</code>，，，<br>( inline-block )：<code>img</code>，<code>input</code>(不同type表现不同，比较怪)，<code>select</code>，<br>以上为chrome与safari实践</p>
-<p>完善中…</p>
+        <h2 id="u9632_u6B62_u6D6E_u70B9_u6570_u6EA2_u51FA"><a href="#u9632_u6B62_u6D6E_u70B9_u6570_u6EA2_u51FA" class="headerlink" title="防止浮点数溢出"></a>防止浮点数溢出</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = 0.1 + 0.2; //0.30000000000000004</span><br></pre></td></tr></table></figure>
+<p>这是JsvaScript中最经常报告的bug，这是遵循二进制浮点数算术标准(IEEE 754)而导致的，幸运的是，浮点数中的整数运算是精确的，所以小数表现出来的问题可以通过指定精度来避免<br>例如，针对上面的相加可以这样处理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = (1+2)/10&#65307; //0.3</span><br></pre></td></tr></table></figure></p>
+<h2 id="u6B63_u786E_u68C0_u6D4B_u6570_u636E_u7C7B_u578B"><a href="#u6B63_u786E_u68C0_u6D4B_u6570_u636E_u7C7B_u578B" class="headerlink" title="正确检测数据类型"></a>正确检测数据类型</h2><p>使用<code>typeof</code>运算符检测<code>null</code>值时，返回的是“object”，而不是“null”。更好的检测方式其实很简单。下面定义了一个检测值类型的一般方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function type = function(o)&#123;&#10;&#9;return (o === null) ? &#34;null&#34; : (typeof o);&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样可以避开因为<code>null</code>值影响基本数据的监测。<br><strong>注意：typeof不能够检测复杂的数据类型，以及各种特殊用途的对象，如正则表达式、日期对象、数学对象等</strong><br>下面是一个比较完整的数据类型安全检测方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#23433;&#20840;&#26816;&#27979;javascript&#22522;&#26412;&#25968;&#25454;&#31867;&#22411;&#21644;&#20869;&#32622;&#23545;&#35937;&#10;//&#21442;&#25968;&#65306;o &#34920;&#31034;&#26816;&#27979;&#30340;&#20540;&#10;/*&#36820;&#22238;&#20540;: &#36820;&#22238;&#23383;&#31526;&#20018;&#34;undefined&#34;&#12289;&#34;number&#34;&#12289;&#34;boolean&#34;&#12289;&#34;string&#34;&#12289;&#34;function&#34;&#12289;&#34;regexp&#34;&#12289;&#34;array&#34;&#12289;&#34;date&#34;&#12289;&#34;error&#34;&#12289;&#34;object&#34;&#12289;&#25110;&#34;null&#34;*/&#10;var typeof = function(o)&#123;&#10;&#9;var _toString = Object.prototype.toString;&#10;&#9;//&#33719;&#21462;&#23545;&#35937;&#30340;toString()&#26041;&#27861;&#24341;&#29992;&#10;&#9;//&#21015;&#20030;&#22522;&#26412;&#25968;&#25454;&#31867;&#22411;&#21644;&#20869;&#32622;&#23545;&#35937;&#31867;&#22411;&#65292;&#21487;&#20197;&#36827;&#19968;&#27493;&#34917;&#20805;&#35813;&#25968;&#32452;&#30340;&#26816;&#27979;&#25968;&#25454;&#31867;&#22411;&#33539;&#22260;&#10;&#9;var _type = &#123;&#10;&#9;&#9;&#34;undefined&#34; : &#34;undefined&#34;,&#10;&#9;&#9;&#34;number&#34; : &#34;number&#34;,&#10;&#9;&#9;&#34;boolean&#34; : &#34;boolean&#34;,&#10;&#9;&#9;&#34;string&#34; : &#34;string&#34;,&#10;&#9;&#9;&#34;[object Function]&#34; : &#34;function&#34;,&#10;&#9;&#9;&#34;[object RegExp]&#34; : &#34;regexp&#34;,&#10;&#9;&#9;&#34;[object Array]&#34; : &#34;array&#34;,&#10;&#9;&#9;&#34;[object Date]&#34; : &#34;date&#34;,&#10;&#9;&#9;&#34;[object Error]&#34; : &#34;error&#34;&#10;&#9;&#125;&#10;&#9;return _type[typeof o] || _type[_toString.call(o)] || (o? &#34;object&#34; : &#34;null&#34;);&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>应用示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var s = Math.abs;&#10;alert( typeof(s) );</span><br></pre></td></tr></table></figure></p>
+<p>##避免误用parseInt<br>建议使用parseInt时，一定要带基数参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parseInt(&#34;08&#34;); //0&#10;parseInt(&#34;08&#34;, 10); //8</span><br></pre></td></tr></table></figure></p>
+<h2 id="u4F7F_u7528_u67E5_u8868_u6CD5_u63D0_u9AD8_u6761_u4EF6_u68C0_u6D4B_u7684_u6027_u80FD"><a href="#u4F7F_u7528_u67E5_u8868_u6CD5_u63D0_u9AD8_u6761_u4EF6_u68C0_u6D4B_u7684_u6027_u80FD" class="headerlink" title="使用查表法提高条件检测的性能"></a>使用查表法提高条件检测的性能</h2><p>例如，在下面代码中，使用switch检测value值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">switch(value)&#123;&#10;&#9;case 0:&#10;&#9;&#9;return result0;&#10;&#9;case 1:&#10;&#9;&#9;return result1;&#10;&#9;case 2:&#10;&#9;&#9;return result2;&#10;&#9;case 03:&#10;&#9;&#9;return result3;&#10;&#9;case 4:&#10;&#9;&#9;return result4;&#10;&#9;case 5:&#10;&#9;&#9;return result5;&#10;&#9;case 6:&#10;&#9;&#9;return result6;&#10;&#9;case 7:&#10;&#9;&#9;return result7;&#10;&#9;case 8:&#10;&#9;&#9;return result8;&#10;&#9;case 9:&#10;&#9;&#9;return result9;&#10;&#9;default :&#10;&#9;&#9;return result10;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用switch结构检测value值的代码所占的空间可能与switch重要性不成比例，代码很笨重，整个结构可以使用一个数组查询代替：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var results = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9];&#10;return results[value] ? results[value] : result10;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -317,7 +329,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/html-自我笔记/" rel="tag"># html 自我笔记</a>
+            <a href="/tags/js/" rel="tag"># js</a>
           
         </div>
       
@@ -330,8 +342,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/11/interview/" rel="next" title="杂项">
-                <i class="fa fa-chevron-left"></i> 杂项
+              <a href="/2018/05/11/ajaxNode/" rel="next" title="ajax学习笔记">
+                <i class="fa fa-chevron-left"></i> ajax学习笔记
               </a>
             
           </div>
@@ -339,10 +351,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/26/cssNode/" rel="prev" title="css笔记">
-                css笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -465,7 +473,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u5757_u7EA7_u5143_u7D20_u4E0E_u884C_u5185_u5143_u7D20"><span class="nav-number">1.</span> <span class="nav-text">块级元素与行内元素</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u9632_u6B62_u6D6E_u70B9_u6570_u6EA2_u51FA"><span class="nav-number">1.</span> <span class="nav-text">防止浮点数溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6B63_u786E_u68C0_u6D4B_u6570_u636E_u7C7B_u578B"><span class="nav-number">2.</span> <span class="nav-text">正确检测数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F7F_u7528_u67E5_u8868_u6CD5_u63D0_u9AD8_u6761_u4EF6_u68C0_u6D4B_u7684_u6027_u80FD"><span class="nav-number">3.</span> <span class="nav-text">使用查表法提高条件检测的性能</span></a></li></ol></div>
             
 
           </div>
